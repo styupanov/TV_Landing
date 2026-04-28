@@ -62,9 +62,9 @@ const InteractiveGrid = () => {
               y1={0}
               x2={x}
               y2={h}
-              stroke="hsl(var(--border))"
+              stroke="black"
               strokeWidth={0.5}
-              opacity={0.5}
+              opacity={0.06}
             />
           );
         })}
@@ -77,9 +77,9 @@ const InteractiveGrid = () => {
               y1={y}
               x2={w}
               y2={y}
-              stroke="hsl(var(--border))"
+              stroke="black"
               strokeWidth={0.5}
-              opacity={0.5}
+              opacity={0.06}
             />
           );
         })}
@@ -99,8 +99,8 @@ const InteractiveGrid = () => {
                   cx={cx}
                   cy={cy}
                   r={1}
-                  fill="hsl(var(--muted-foreground))"
-                  opacity={0.15}
+                  fill="black"
+                  opacity={0.1}
                 />
               );
             }
@@ -109,8 +109,8 @@ const InteractiveGrid = () => {
             const dy = cy - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const influence = Math.max(0, 1 - dist / radius);
-            const r = 1 + influence * 4;
-            const opacity = 0.15 + influence * 0.6;
+            const r = 1 + influence * 3;
+            const opacity = 0.1 + influence * 0.4;
 
             return (
               <circle
@@ -118,13 +118,9 @@ const InteractiveGrid = () => {
                 cx={cx}
                 cy={cy}
                 r={r}
-                fill={
-                  influence > 0.5
-                    ? "hsl(var(--accent))"
-                    : "hsl(var(--muted-foreground))"
-                }
+                fill="black"
                 opacity={opacity}
-                style={{ transition: "r 0.15s, opacity 0.15s, fill 0.3s" }}
+                style={{ transition: "r 0.15s, opacity 0.15s" }}
               />
             );
           })}
