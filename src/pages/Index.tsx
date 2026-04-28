@@ -14,13 +14,13 @@ const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="h-screen bg-[#f4f4f4] text-foreground flex flex-col overflow-hidden leading-tight">
+    <div className="h-screen bg-background text-foreground flex flex-col overflow-hidden leading-tight">
       {/* Navigation */}
       <motion.nav
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex items-center justify-end border-b border-black/5 px-4 md:px-10 py-1 md:py-2 h-10 md:h-14 shrink-0 relative z-50 bg-[#f4f4f4]/80 backdrop-blur-sm"
+        className="flex items-center justify-end border-b border-black/5 px-4 md:px-10 py-1 md:py-2 h-10 md:h-14 shrink-0 relative z-50 bg-background/80 backdrop-blur-sm"
       >
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
@@ -40,34 +40,41 @@ const Index = () => {
       </motion.nav>
 
       {/* Hero — large centered name + interactive grid */}
-      <div className="flex-1 flex flex-col items-center justify-center relative px-4 py-2 md:py-8 overflow-hidden min-h-0">
+      <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden min-h-0">
         {/* Interactive grid background */}
         <div className="absolute inset-0">
           <InteractiveGrid />
         </div>
         
-        <div className="flex-1 flex flex-col items-center justify-center w-full relative z-10 pointer-events-none">
+        <div className="flex-1 flex flex-col items-center justify-center w-full relative z-10 pointer-events-none px-4 py-2 md:py-8">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.9 }}
             className="text-center shrink-0"
           >
-            <div className="flex items-center gap-3 md:gap-8">
-              <h1 className="text-[clamp(1.8rem,8vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.04em] uppercase text-right text-black">
-                Terra
-                <br />
-                Vista
-              </h1>
-              <div className="w-[1.5px] self-stretch bg-black/10" />
-              <p
-                className="text-[clamp(1.8rem,8vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.04em] uppercase text-black/15 select-none text-left"
-                aria-hidden="true"
-              >
-                Терра
-                <br />
-                Виста
-              </p>
+            <div className="relative flex items-center gap-3 md:gap-8 w-full max-w-7xl mx-auto">
+              <div className="flex-1 text-right">
+                <h1 className="text-[clamp(1.8rem,8vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.04em] uppercase text-black inline-block">
+                  Terra
+                  <br />
+                  Vista
+                </h1>
+              </div>
+              {/* Invisible spacer to maintain layout */}
+              <div className="w-[1px] md:w-[2px] self-stretch invisible shrink-0" />
+              <div className="flex-1 text-left">
+                <p
+                  className="text-[clamp(1.8rem,8vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.04em] uppercase text-black/15 select-none inline-block"
+                  aria-hidden="true"
+                >
+                  Терра
+                  <br />
+                  Виста
+                </p>
+              </div>
+              {/* Absolute centered separator line */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-[1px] md:w-[2px] bg-black/10 -translate-x-1/2" />
             </div>
           </motion.div>
 
@@ -105,11 +112,11 @@ const Index = () => {
             <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">ГОРОД</p>
             <p className="text-[10px] md:text-[14px] font-bold text-black">Москва</p>
           </div>
-          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-start text-center md:text-left overflow-hidden">
+          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center text-center overflow-hidden">
             <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">EMAIL</p>
             <p className="text-[10px] md:text-[14px] font-bold text-black truncate w-full">office@terra-vista.ru</p>
           </div>
-          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-end text-center md:text-right">
             <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">ТЕЛЕФОН</p>
             <p className="text-[10px] md:text-[14px] font-bold text-black whitespace-nowrap">+7 916 824-58-81</p>
           </div>

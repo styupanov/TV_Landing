@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const COLS = 24;
-const ROWS = 12;
+const GRID_SIZE = 60; // Fixed size for cells
+const radius = 180;
 
 const InteractiveGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,7 +15,8 @@ const InteractiveGrid = () => {
 
     const update = () => {
       const rect = el.getBoundingClientRect();
-      setDimensions({ w: rect.width, h: rect.height });
+      // Using Math.floor to ensure we work with integer pixels
+      setDimensions({ w: Math.floor(rect.width), h: Math.floor(rect.height) });
     };
     update();
     window.addEventListener("resize", update);
@@ -31,9 +32,18 @@ const InteractiveGrid = () => {
   const handleMouseLeave = () => setMouse({ x: -1, y: -1 });
 
   const { w, h } = dimensions;
-  const cellW = w / COLS;
-  const cellH = h / ROWS;
-  const radius = 180;
+  
+  // Calculate grid offsets to center the grid
+  const centerX = w / 2;
+  const centerY = h / 2;
+  
+  const colsCount = Math.ceil(w / GRID_SIZE) + 2;
+  const rowsCount = Math.ceil(h / GRID_SIZE) + 2;
+  
+  const startCol = -Math.floor(colsCount / 2);
+  const endCol = Math.ceil(colsCount / 2);
+  const startRow = -Math.floor(rowsCount / 2);
+  const endRow = Math.ceil(rowsCount / 2);
 
   return (
     <motion.div
@@ -46,15 +56,14 @@ const InteractiveGrid = () => {
       className="relative w-full h-full overflow-hidden cursor-crosshair"
     >
       <svg
-        width="100%"
-        height="100%"
-        viewBox={`0 0 ${w} ${h}`}
+        width={w}
+        height={h}
         className="absolute inset-0"
-        preserveAspectRatio="none"
+        style={{ shapeRendering: "crispEdges" }}
       >
-        {/* Grid lines */}
-        {Array.from({ length: COLS + 1 }).map((_, i) => {
-          const x = i * cellW;
+        {/* Vertical Grid lines */}
+        {Array.from({ length: endCol - startCol + 1 }).map((_, i) => {
+          const x = centerX + (startCol + i) * GRID_SIZE;
           return (
             <line
               key={`v${i}`}
@@ -68,8 +77,9 @@ const InteractiveGrid = () => {
             />
           );
         })}
-        {Array.from({ length: ROWS + 1 }).map((_, i) => {
-          const y = i * cellH;
+        {/* Horizontal Grid lines */}
+        {Array.from({ length: endRow - startRow + 1 }).map((_, i) => {
+          const y = centerY + (startRow + i) * GRID_SIZE;
           return (
             <line
               key={`h${i}`}
@@ -86,11 +96,12 @@ const InteractiveGrid = () => {
 
         {/* Interactive nodes at intersections */}
         {w > 0 &&
-          Array.from({ length: (COLS + 1) * (ROWS + 1) }).map((_, idx) => {
-            const col = idx % (COLS + 1);
-            const row = Math.floor(idx / (COLS + 1));
-            const cx = col * cellW;
-            const cy = row * cellH;
+          Array.from({ length: (endCol - startCol + 1) * (endRow - startRow + 1) }).map((_, idx) => {
+            const colIdx = idx % (endCol - startCol + 1);
+            const rowIdx = Math.floor(idx / (endCol - startCol + 1));
+            
+            const cx = centerX + (startCol + colIdx) * GRID_SIZE;
+            const cy = centerY + (startRow + rowIdx) * GRID_SIZE;
 
             if (mouse.x < 0) {
               return (
@@ -118,9 +129,9 @@ const InteractiveGrid = () => {
                 cx={cx}
                 cy={cy}
                 r={r}
-                fill="black"
+                fill={influence > 0.3 ? "#e57373" : "black"}
                 opacity={opacity}
-                style={{ transition: "r 0.15s, opacity 0.15s" }}
+                style={{ transition: "r 0.15s, opacity 0.15s, fill 0.3s" }}
               />
             );
           })}
