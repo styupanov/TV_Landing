@@ -46,12 +46,12 @@ const Index = () => {
           <InteractiveGrid />
         </div>
         
-        <div className="flex-1 flex flex-col items-center justify-center w-full relative z-10">
+        <div className="flex-1 flex flex-col items-center justify-center w-full relative z-10 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.9 }}
-            className="text-center shrink-0"
+            className="text-center shrink-0 pointer-events-auto"
           >
             <div className="flex items-center gap-3 md:gap-8">
               <h1 className="text-[clamp(1.8rem,8vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.04em] uppercase text-right">
@@ -71,7 +71,7 @@ const Index = () => {
             </div>
           </motion.div>
 
-          <div className="mt-4 md:mt-8 text-center relative z-10 max-w-2xl px-4 shrink-0">
+          <div className="mt-4 md:mt-8 text-center relative z-10 max-w-2xl px-4 shrink-0 pointer-events-auto">
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
