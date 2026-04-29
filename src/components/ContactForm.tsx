@@ -39,10 +39,25 @@ export function ContactForm({ onSuccess }: { onSuccess: () => void }) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    setIsSubmitted(true);
-    // Auto-close after some time if needed, or keep it open
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const response = await fetch("https://formspree.io/f/xjgjnrgp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        name: values.name,
+        company: values.company,
+        email: values.email,
+        phone: values.phone,
+        "_gotcha": "",
+      }),
+    });
+
+    if (response.ok) {
+      setIsSubmitted(true);
+    }
   }
 
   if (isSubmitted) {
