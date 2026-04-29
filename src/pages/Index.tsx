@@ -1,44 +1,9 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import InteractiveGrid from "@/components/InteractiveGrid";
-import { ContactForm } from "@/components/ContactForm";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 const Index = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="h-screen bg-background text-foreground flex flex-col overflow-hidden leading-tight">
-      {/* Navigation */}
-      <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="flex items-center justify-end border-b border-black/5 px-4 md:px-10 py-1 md:py-2 h-10 md:h-14 shrink-0 relative z-50 bg-background/80 backdrop-blur-sm"
-      >
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <button 
-              className="text-[10px] md:text-[12px] font-medium tracking-[0.1em] uppercase text-foreground hover:bg-foreground hover:text-background border border-foreground/20 px-3 py-1 md:px-5 md:py-1.5 transition-all cursor-pointer relative z-[60] inline-flex items-center justify-center outline-none"
-            >
-              Оставить заявку
-            </button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] rounded-none border-border bg-background p-6">
-            <DialogHeader>
-              <DialogTitle className="text-xl font-bold uppercase tracking-tight">Оставьте заявку</DialogTitle>
-            </DialogHeader>
-            <ContactForm onSuccess={() => setIsOpen(false)} />
-          </DialogContent>
-        </Dialog>
-      </motion.nav>
-
       {/* Hero — large centered name + interactive grid */}
       <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden min-h-0">
         {/* Interactive grid background */}
