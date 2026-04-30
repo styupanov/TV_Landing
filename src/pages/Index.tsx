@@ -72,18 +72,14 @@ const Index = () => {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="border-t border-black/10 bg-transparent relative z-10 shrink-0"
       >
-        <div className="grid grid-cols-3 divide-x-[0.5px] divide-black/10">
-          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-start text-center md:text-left">
-            <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">ГОРОД</p>
-            <p className="text-[10px] md:text-[14px] font-bold text-black">Москва</p>
-          </div>
-          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center text-center overflow-hidden">
+        <div className="grid grid-cols-2 divide-x-[0.5px] divide-black/10">
+          <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-start text-center md:text-left overflow-hidden">
             <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">EMAIL</p>
             <p className="text-[10px] md:text-[14px] font-bold text-black truncate w-full">office@terra-vista.ru</p>
           </div>
           <div className="px-2 md:px-12 py-3 md:py-6 flex flex-col items-center md:items-end text-center md:text-right">
-            <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">ТЕЛЕФОН</p>
-            <p className="text-[10px] md:text-[14px] font-bold text-black whitespace-nowrap">+7 916 824-58-81</p>
+            <p className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase text-black/40 mb-1 font-bold">ГОРОД</p>
+            <p className="text-[10px] md:text-[14px] font-bold text-black">Москва</p>
           </div>
         </div>
       </motion.div>

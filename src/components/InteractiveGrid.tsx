@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const GRID_SIZE = 60; // Fixed size for cells
+const GRID_SIZE = 15; // Fixed size for cells
 const radius = 180;
 
 const InteractiveGrid = () => {
